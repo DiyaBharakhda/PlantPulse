@@ -85,7 +85,8 @@ def update_plant_table():
     ("pot_material", "TEXT"),
     ("drainage", "TEXT"),
     ("sunlight", "TEXT"),
-    ("rain_exposure", "TEXT")
+    ("rain_exposure", "TEXT"),
+    ("spot", "TEXT")
 ]
 
     existing_columns = [
