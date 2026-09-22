@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://plantpulse-backend-b06s.onrender.com/api/:path*"
+    }
+  ]
+}
