@@ -1,0 +1,75 @@
+.app {
+  min-height: 100vh;
+  padding: 32px 48px;
+}
+
+.welcome {
+  max-width: 720px;
+  margin: 140px auto 0;
+}
+
+.eyebrow {
+  margin-bottom: 20px;
+
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.welcome h1 {
+  margin: 0;
+
+  font-size: clamp(48px, 6vw, 76px);
+  line-height: 1.05;
+  letter-spacing: -3px;
+  font-weight: 700;
+}
+
+.description {
+  max-width: 540px;
+  margin-top: 28px;
+
+  color: var(--text-secondary);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+button {
+  margin-top: 32px;
+  padding: 14px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--primary);
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+.space-setup-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 22px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.space-setup-back:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(-2px);
+}

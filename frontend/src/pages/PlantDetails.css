@@ -1,0 +1,395 @@
+.details-page {
+  min-height: 100vh;
+  padding: 60px 48px;
+  background: var(--background);
+}
+
+.details-content {
+  width: min(100%, 900px);
+  margin: 0 auto;
+}
+
+.details-eyebrow {
+  margin: 0 0 24px;
+
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.details-title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  margin-bottom: 44px;
+}
+
+.details-plant-icon {
+  width: 64px;
+  height: 64px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.details-title h1 {
+  margin: 0;
+
+  font-size: clamp(40px, 5vw, 58px);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.details-title p {
+  margin: 10px 0 0;
+
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.details-section {
+  margin-bottom: 36px;
+  padding: 26px;
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  background: var(--surface);
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  margin-bottom: 22px;
+
+  color: var(--primary);
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+  font-size: 18px;
+}
+
+.section-heading p {
+  margin: 6px 0 0;
+
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.choice-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.choice-grid.two {
+  grid-template-columns: 1fr 1fr;
+}
+
+.choice-grid.three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.choice-grid.four {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.choice-card {
+  min-height: 72px;
+  padding: 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  background: var(--background);
+  color: var(--text-primary);
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.choice-card:hover {
+  border-color: var(--primary);
+}
+
+.choice-card.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.choice-card strong {
+  display: block;
+
+  font-size: 14px;
+}
+
+.choice-card span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.details-continue-button {
+  width: 100%;
+
+  margin-top: 4px;
+  padding: 16px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--primary);
+  color: #101412;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.details-continue-button:hover {
+  background: var(--primary-dark);
+}
+
+.details-continue-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+
+  .details-page {
+    padding: 40px 20px;
+  }
+
+  .choice-grid.three,
+  .choice-grid.four {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  .choice-grid.two,
+  .choice-grid.three,
+  .choice-grid.four {
+    grid-template-columns: 1fr;
+  }
+
+}
+.plant-details-page button {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+}
+.plant-library-button {
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.plant-library-button:hover {
+  transform: translateY(-2px);
+}
+/* =========================
+   MY PLANTS DASHBOARD
+   ========================= */
+
+.all-plants-section {
+  margin-top: 28px;
+}
+
+.all-plants-section .section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.all-plants-section .section-title > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-plant-dashboard-button {
+  border: 1px solid #6f9d7c;
+  background: #1b2920;
+  color: #b8d8bf;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-plant-dashboard-button:hover {
+  background: #24382a;
+}
+
+.all-plants-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.plant-dashboard-card {
+  width: 100%;
+  min-height: 88px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 16px;
+  border: 1px solid #29382f;
+  border-radius: 16px;
+  background: #141d18;
+}
+
+.plant-dashboard-card.selected {
+  border-color: #83bd91;
+  background: #1b2920;
+}
+
+.plant-dashboard-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.plant-summary-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: #203025;
+}
+
+.plant-summary-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plant-summary-info strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.plant-summary-info span {
+  font-size: 13px;
+  color: #8fa296;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.plant-summary-info small {
+  font-size: 12px;
+  color: #9fc3a7;
+}
+
+.plant-dashboard-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.plant-water-button,
+.plant-details-button {
+  border-radius: 9px;
+  padding: 9px 13px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.plant-water-button {
+  border: 1px solid #6f9d7c;
+  background: #263c2c;
+  color: #c8e2cd;
+}
+
+.plant-details-button {
+  border: 1px solid #29382f;
+  background: transparent;
+  color: #aab9ae;
+}
+
+.plant-water-button:hover,
+.plant-details-button:hover {
+  transform: translateY(-1px);
+}
+.fetch-weather-button {
+  margin-top: 14px;
+  border: 1px solid #6f9d7c;
+  background: #1b2920;
+  color: #b8d8bf;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fetch-weather-button:hover {
+  background: #24382a;
+}
+.plant-details-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 22px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.plant-details-back:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(-2px);
+}

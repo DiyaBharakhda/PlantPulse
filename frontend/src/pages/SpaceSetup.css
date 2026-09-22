@@ -1,0 +1,146 @@
+.space-page {
+  min-height: 100vh;
+  padding: 60px 48px;
+  background: var(--background);
+}
+
+.space-content {
+  width: min(100%, 900px);
+  margin: 0 auto;
+}
+
+.space-eyebrow {
+  margin: 0 0 18px;
+
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.space-content h1 {
+  margin: 0;
+
+  font-size: clamp(42px, 6vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -2.5px;
+}
+
+.space-description {
+  max-width: 650px;
+  margin: 24px 0 42px;
+
+  color: var(--text-secondary);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.space-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.space-option {
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 22px;
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  background: var(--surface);
+  color: var(--text-primary);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.space-option:hover {
+  border-color: var(--primary);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+}
+
+.space-option.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.space-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.space-option span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.space-continue-button {
+  width: 100%;
+
+  margin-top: 28px;
+  padding: 16px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--primary);
+  color: #101412;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.space-continue-button:hover {
+  background: var(--primary-dark);
+}
+
+.space-continue-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+
+  .space-page {
+    padding: 40px 20px;
+  }
+
+  .space-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  .space-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

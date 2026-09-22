@@ -1,0 +1,238 @@
+.watering-page {
+  min-height: 100vh;
+  padding: 60px 48px;
+  background: var(--background);
+}
+
+.watering-content {
+  width: min(100%, 850px);
+  margin: 0 auto;
+}
+
+.watering-eyebrow {
+  margin: 0 0 18px;
+
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.watering-content h1 {
+  max-width: 750px;
+
+  margin: 0;
+
+  font-size: clamp(42px, 6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -2.5px;
+}
+
+.watering-description {
+  max-width: 650px;
+
+  margin: 22px 0 38px;
+
+  color: var(--text-secondary);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.watering-section {
+  margin-bottom: 22px;
+  padding: 24px;
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  background: var(--surface);
+}
+
+.watering-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  margin-bottom: 20px;
+}
+
+.watering-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.watering-heading h2 {
+  margin: 2px 0 0;
+
+  font-size: 18px;
+}
+
+.watering-heading p {
+  margin: 6px 0 0;
+
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.watering-date {
+  width: 100%;
+  height: 52px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  outline: none;
+
+  background: var(--background);
+  color: var(--text-primary);
+
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.watering-date:focus {
+  border-color: var(--primary);
+}
+
+.watering-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.watering-option {
+  min-height: 90px;
+
+  padding: 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  background: var(--background);
+  color: var(--text-primary);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.watering-option:hover {
+  border-color: var(--primary);
+}
+
+.watering-option.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.watering-option strong {
+  display: block;
+
+  font-size: 14px;
+}
+
+.watering-option span {
+  display: block;
+
+  margin-top: 6px;
+
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.watering-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 24px;
+  padding: 15px 16px;
+
+  border: 1px solid var(--primary);
+  border-radius: 14px;
+
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.watering-summary strong {
+  display: block;
+
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.watering-summary span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.watering-continue-button {
+  width: 100%;
+
+  margin-top: 26px;
+  padding: 16px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--primary);
+  color: #101412;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.watering-continue-button:hover {
+  background: var(--primary-dark);
+}
+
+.watering-continue-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+
+  .watering-page {
+    padding: 40px 20px;
+  }
+
+  .watering-options {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (max-width: 450px) {
+
+  .watering-options {
+    grid-template-columns: 1fr;
+  }
+
+}

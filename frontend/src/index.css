@@ -1,0 +1,48 @@
+:root {
+  --background: #101412;
+  --surface: #171c19;
+  --surface-soft: #202722;
+
+  --primary: #8fc69c;
+  --primary-light: #26372b;
+  --primary-dark: #6eaa7d;
+
+  --text-primary: #f1f4f1;
+  --text-secondary: #a5afa8;
+  --text-muted: #707a73;
+
+  --border: #2b332e;
+
+  --success: #83c997;
+  --warning: #d5a85c;
+  --danger: #d4776c;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: var(--text-primary);
+  background: var(--background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-primary);
+}

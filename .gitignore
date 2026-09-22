@@ -1,0 +1,22 @@
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Backend Python environment
+backend/diyaenv/
+backend/__pycache__/
+backend/*.pyc
+
+# Environment variables
+.env
+backend/.env
+frontend/.env
+frontend/.env.local
+
+# Local database
+backend/plantpulse.db
+
+# Editor / OS files
+.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,308 @@
+.plant-care-page {
+  min-height: 100vh;
+  background: #08100c;
+  color: #f4f7f4;
+}
+
+.plant-care-content {
+  width: min(920px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 40px 0 80px;
+}
+
+.plant-care-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #a9c8b0;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 38px;
+}
+
+.plant-care-back:hover {
+  color: #ffffff;
+}
+
+.plant-care-header {
+  margin-bottom: 30px;
+}
+
+.plant-care-eyebrow {
+  color: #8ed39c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+
+.plant-care-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.plant-care-title-row h1 {
+  font-size: 38px;
+  line-height: 1.15;
+  margin: 0 0 12px;
+}
+
+.plant-care-title-row p {
+  color: #9eafa4;
+  margin: 0;
+}
+
+.plant-care-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: #193123;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9bd7a5;
+  flex-shrink: 0;
+}
+
+.plant-care-section {
+  background: #101b15;
+  border: 1px solid #263a2e;
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.care-action-card {
+  border-color: #4b7958;
+  background: #14251b;
+}
+
+.care-action-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.care-action-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #203a29;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.care-action-heading span {
+  font-size: 11px;
+  color: #91b29a;
+  letter-spacing: 0.08em;
+}
+
+.care-action-heading h2 {
+  margin: 4px 0 0;
+  font-size: 25px;
+}
+
+.care-action-message {
+  margin: 22px 0;
+  color: #d5dfd8;
+  line-height: 1.65;
+}
+
+.care-water-guidance {
+  padding: 17px;
+  border-radius: 14px;
+  background: #0c1710;
+  margin-bottom: 18px;
+}
+
+.care-water-guidance > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.care-water-guidance span {
+  color: #91a69a;
+  font-size: 13px;
+}
+
+.care-water-guidance strong {
+  color: #f3f7f3;
+}
+
+.care-water-guidance p {
+  color: #8fa197;
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+.care-primary-button {
+  border: 1px solid #75b584;
+  background: #23432c;
+  color: #f4fff6;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.care-no-water-message {
+  display: inline-block;
+  padding: 11px 16px;
+  border-radius: 10px;
+  background: #0c1710;
+  color: #b9cdbf;
+  font-size: 14px;
+}
+
+.plant-care-section-title {
+  margin-bottom: 20px;
+}
+
+.plant-care-section-title h2 {
+  margin: 0 0 5px;
+  font-size: 21px;
+}
+
+.plant-care-section-title span {
+  color: #809388;
+  font-size: 13px;
+}
+
+.care-reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.care-reason {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px;
+  border-radius: 12px;
+  background: #0c1710;
+}
+
+.reason-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1c3525;
+  color: #9dd7a5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.care-reason p {
+  margin: 0;
+  color: #c3d0c8;
+  font-size: 14px;
+}
+
+.care-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.care-metric-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #0c1710;
+  border: 1px solid #203228;
+}
+
+.care-metric-card > svg {
+  color: #91c99a;
+  flex-shrink: 0;
+}
+
+.care-metric-card span,
+.care-calculation-card span,
+.care-placement-card span {
+  display: block;
+  color: #81958a;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.care-metric-card strong {
+  font-size: 16px;
+}
+
+.care-calculation-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.care-calculation-card > div {
+  background: #0c1710;
+  border: 1px solid #203228;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.care-calculation-card strong {
+  font-size: 17px;
+}
+
+.care-placement-card {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  align-items: center;
+  gap: 18px;
+  background: #0c1710;
+  border: 1px solid #203228;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.care-placement-card > svg {
+  color: #91c99a;
+}
+
+.care-placement-card strong {
+  font-size: 15px;
+}
+
+@media (max-width: 700px) {
+
+  .plant-care-content {
+    width: min(100% - 24px, 920px);
+    padding-top: 25px;
+  }
+
+  .plant-care-title-row h1 {
+    font-size: 30px;
+  }
+
+  .care-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .care-calculation-card {
+    grid-template-columns: 1fr;
+  }
+
+  .care-placement-card {
+    grid-template-columns: auto 1fr;
+  }
+
+}

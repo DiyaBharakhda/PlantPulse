@@ -1,0 +1,272 @@
+.plant-page {
+  min-height: 100vh;
+  padding: 60px 48px;
+  background: var(--background);
+}
+
+.plant-content {
+  width: min(100%, 900px);
+  margin: 0 auto;
+}
+
+.plant-eyebrow {
+  margin: 0 0 18px;
+
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.plant-content h1 {
+  margin: 0;
+
+  font-size: clamp(42px, 6vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -2.5px;
+}
+
+.plant-description {
+  max-width: 650px;
+  margin: 24px 0 36px;
+
+  color: var(--text-secondary);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.plant-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  height: 54px;
+  padding: 0 16px;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  background: var(--surface);
+
+  color: var(--text-muted);
+}
+
+.plant-search:focus-within {
+  border-color: var(--primary);
+}
+
+.plant-search input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+  color: var(--text-primary);
+
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.plant-search input::placeholder {
+  color: var(--text-muted);
+}
+
+.plant-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.plant-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 78px;
+  padding: 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background: var(--surface);
+  color: var(--text-primary);
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.plant-option:hover {
+  border-color: var(--primary);
+  background: var(--surface-soft);
+  transform: translateY(-2px);
+}
+
+.plant-option.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.plant-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.plant-info strong {
+  display: block;
+  font-size: 14px;
+}
+
+.plant-info span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.plant-empty {
+  margin-top: 20px;
+
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.selected-plant {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 20px;
+  padding: 14px 16px;
+
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.selected-plant strong {
+  display: block;
+
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.selected-plant span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.plant-continue-button {
+  width: 100%;
+
+  margin-top: 28px;
+  padding: 16px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--primary);
+  color: #101412;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.plant-continue-button:hover {
+  background: var(--primary-dark);
+}
+
+.plant-continue-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+
+  .plant-page {
+    padding: 40px 20px;
+  }
+
+  .plant-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+.custom-plant-input {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-plant-input label {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.custom-plant-input input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.custom-plant-input input:focus {
+  border-color: rgba(120, 190, 140, 0.65);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.custom-plant-input input::placeholder {
+  opacity: 0.45;
+}
+.plant-setup-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 22px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.plant-setup-back:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(-2px);
+}
