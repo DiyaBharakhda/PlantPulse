@@ -45,6 +45,7 @@ visiblePlants.forEach((plant, index) => {
 const [plantPositions, setPlantPositions] = useState(initialPositions)
 const [plantSpots, setPlantSpots] = useState({})
 const [locationChanged, setLocationChanged] = useState(null)
+const [draggingPlantId, setDraggingPlantId] = useState(null)
 
   const getSpotFromPosition = (x, y) => {
 
@@ -78,34 +79,39 @@ const [locationChanged, setLocationChanged] = useState(null)
     return "Partial Shade"
   }
 
- const handleDragEnd = (event, plantId) => {
-  const spaceArea = event.currentTarget.parentElement
+const getPositionFromPoint = (clientX, clientY, spaceArea) => {
   const rect = spaceArea.getBoundingClientRect()
 
-  let x = ((event.clientX - rect.left) / rect.width) * 100
-  let y = ((event.clientY - rect.top) / rect.height) * 100
+  let x = ((clientX - rect.left) / rect.width) * 100
+  let y = ((clientY - rect.top) / rect.height) * 100
 
   x = Math.max(8, Math.min(92, x))
   y = Math.max(12, Math.min(88, y))
 
+  return { x, y }
+}
+
+const savePlantPosition = (plantId, position) => {
+  localStorage.setItem(
+    "plantpulse_positions",
+    JSON.stringify({
+      ...getSavedPositions(),
+      [plantId]: position
+    })
+  )
+}
+
+const commitPlantPlacement = (plantId, x, y) => {
   const spot = getSpotFromPosition(x, y)
 
-  setPlantPositions((current) => {
-    const updated = {
-      ...current,
-      [plantId]: { x, y }
-    }
+  const position = { x, y }
 
-    localStorage.setItem(
-      "plantpulse_positions",
-      JSON.stringify({
-        ...getSavedPositions(),
-        [plantId]: { x, y }
-      })
-    )
+  setPlantPositions((current) => ({
+    ...current,
+    [plantId]: position
+  }))
 
-    return updated
-  })
+  savePlantPosition(plantId, position)
 
   setPlantSpots((current) => ({
     ...current,
@@ -122,6 +128,71 @@ const [locationChanged, setLocationChanged] = useState(null)
   }
 }
 
+/* Desktop drag */
+const handleDragEnd = (event, plantId) => {
+  const spaceArea = event.currentTarget.parentElement
+
+  const { x, y } = getPositionFromPoint(
+    event.clientX,
+    event.clientY,
+    spaceArea
+  )
+
+  commitPlantPlacement(plantId, x, y)
+}
+
+/* Mobile touch/pointer drag */
+const handlePointerDown = (event, plantId) => {
+  event.preventDefault()
+
+  setDraggingPlantId(plantId)
+
+  if (event.currentTarget.setPointerCapture) {
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+}
+
+const handlePointerMove = (event, plantId) => {
+  if (draggingPlantId !== plantId) {
+    return
+  }
+
+  event.preventDefault()
+
+  const spaceArea = event.currentTarget.parentElement
+
+  const { x, y } = getPositionFromPoint(
+    event.clientX,
+    event.clientY,
+    spaceArea
+  )
+
+  setPlantPositions((current) => ({
+    ...current,
+    [plantId]: { x, y }
+  }))
+}
+
+const handlePointerUp = (event, plantId) => {
+  if (draggingPlantId !== plantId) {
+    return
+  }
+
+  event.preventDefault()
+
+  const spaceArea = event.currentTarget.parentElement
+
+  const { x, y } = getPositionFromPoint(
+    event.clientX,
+    event.clientY,
+    spaceArea
+  )
+
+  commitPlantPlacement(plantId, x, y)
+
+  setDraggingPlantId(null)
+}
+
   const renderPlants = () => {
 
     return visiblePlants.map((plant) => {
@@ -133,18 +204,33 @@ const [locationChanged, setLocationChanged] = useState(null)
 
       return (
         
-        <div
-          key={plant.id}
-          className="draggable-plant"
-          draggable
-          onDragEnd={(event) =>
-            handleDragEnd(event, plant.id)
-          }
-          style={{
-            left: `${position.x}%`,
-            top: `${position.y}%`
-          }}
-        >
+       <div
+  key={plant.id}
+  className={`draggable-plant ${
+    draggingPlantId === plant.id ? "is-dragging" : ""
+  }`}
+  draggable
+  onDragEnd={(event) =>
+    handleDragEnd(event, plant.id)
+  }
+  onPointerDown={(event) =>
+    handlePointerDown(event, plant.id)
+  }
+  onPointerMove={(event) =>
+    handlePointerMove(event, plant.id)
+  }
+  onPointerUp={(event) =>
+    handlePointerUp(event, plant.id)
+  }
+  onPointerCancel={(event) =>
+    handlePointerUp(event, plant.id)
+  }
+  style={{
+    left: `${position.x}%`,
+    top: `${position.y}%`
+  }}
+>
+       
           <span className="plant-icon">
             🪴
           </span>

@@ -23,6 +23,7 @@ const [screen, setScreen] = useState(() => {
   return localStorage.getItem("plantpulse_user") ? "dashboard" : "welcome"
 })
 const [selectedPlant, setSelectedPlant] = useState(null)
+const [isEditingPlant, setIsEditingPlant] = useState(false)
 const [plants, setPlants] = useState([])
 const [plantData, setPlantData] = useState(null)
 const [location, setLocation] = useState(null)
@@ -611,22 +612,141 @@ if (screen === "plant-details") {
         sunlight: plantData?.details?.sunlight || "",
         rainExposure: plantData?.details?.rainExposure || ""
       }}
-      onBack={() => {
-  setScreen("plant")
+   onBack={() => {
+  if (isEditingPlant) {
+    setScreen("plant-view")
+  } else {
+    setScreen("plant")
+  }
 }}
-      onContinue={(details) => {
-        console.log("Plant details:", details)
+      onContinue={async (details) => {
+  console.log("Plant details:", details)
 
-        setPlantData({
-          plant: selectedPlant,
-          details: details,
-          location: location,
-          space: null
-        })
+  /* =====================================================
+     EDIT EXISTING PLANT
+     Do NOT create a new plant.
+     Do NOT change location or space.
+     ===================================================== */
 
-        // After details → choose where the plant lives
-        setScreen("choose-space")
-      }}
+  if (isEditingPlant && selectedPlant?.id) {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/plants/${selectedPlant.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            user_id: currentUser.id,
+            age: details.age,
+            pot_size: details.potSize,
+            pot_material: details.potMaterial,
+            drainage: details.drainage,
+            sunlight: details.sunlight,
+            rain_exposure: details.rainExposure
+          })
+        }
+      )
+
+      const data = await response.json()
+
+      console.log(
+        "Plant edit response:",
+        response.status,
+        data
+      )
+
+      if (!response.ok) {
+        alert(
+          `Could not update plant details.\n\n${
+            data.detail || "Server error"
+          }`
+        )
+        return
+      }
+
+      /* Keep the SAME plant ID and SAME location/space */
+      const updatedPlant = {
+        ...selectedPlant,
+        age: details.age,
+        pot_size: details.potSize,
+        pot_material: details.potMaterial,
+        drainage: details.drainage,
+        sunlight: details.sunlight,
+        rain_exposure: details.rainExposure
+      }
+
+      /* Replace the existing plant instead of adding a duplicate */
+      setPlants((currentPlants) =>
+        currentPlants.map((plant) =>
+          plant.id === selectedPlant.id
+            ? {
+                ...plant,
+                ...updatedPlant
+              }
+            : plant
+        )
+      )
+
+      setSelectedPlant(updatedPlant)
+
+      setPlantData((current) => ({
+        ...current,
+        plant: {
+          ...current?.plant,
+          id: updatedPlant.id,
+          name: updatedPlant.name,
+          scientificName:
+            updatedPlant.scientificName ||
+            updatedPlant.scientific_name
+        },
+        details: details,
+
+        /* Preserve existing location */
+        location: current?.location || location,
+
+        /* Preserve existing space */
+        space: current?.space || space,
+
+        /* Preserve existing spot */
+        spot: current?.spot || null
+      }))
+
+      setIsEditingPlant(false)
+
+      /* Go back to the same plant */
+      setScreen("plant-view")
+
+      return
+
+    } catch (error) {
+      console.error(
+        "Plant edit failed:",
+        error
+      )
+
+      alert(
+        "Could not connect to the PlantPulse backend."
+      )
+
+      return
+    }
+  }
+
+  /* =====================================================
+     NORMAL NEW-PLANT FLOW
+     ===================================================== */
+
+  setPlantData({
+    plant: selectedPlant,
+    details: details,
+    location: location,
+    space: null
+  })
+
+  setScreen("choose-space")
+}}
     />
   )
 }
@@ -821,6 +941,7 @@ if (screen === "plant-view") {
         setScreen("watering")
       }}
       onEditDetails={() => {
+  setIsEditingPlant(true)
   setScreen("plant-details")
 }}
     />
@@ -935,9 +1056,10 @@ onAddPlant={async () => {
     console.log("Spaces available for new plant:", data)
 
     setSpaces(data)
-    setSelectedPlant(null)
-    setPlantData(null)
-    setSpace(null)
+    setIsEditingPlant(false)
+setSelectedPlant(null)
+setPlantData(null)
+setSpace(null)
 
     setScreen("plant")
   } catch (error) {

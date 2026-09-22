@@ -1061,4 +1061,91 @@
     padding: 15px;
   }
 }
+/* =========================================================
+   MOBILE — TODAY'S CARE FULL WIDTH FIX
+   ========================================================= */
 
+.today-care-section {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.today-care-section .priority-list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  gap: 14px !important;
+}
+
+.today-care-section .priority-card {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+.today-care-section .priority-content {
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+.today-care-section .priority-top,
+.today-care-section .priority-content p {
+  min-width: 0 !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+
+.today-care-section .priority-water-button {
+  width: fit-content !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 600px) {
+  .dashboard-page {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .dashboard-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .dashboard-section,
+  .today-care-section,
+  .location-card,
+  .weather-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .today-care-section .priority-card {
+    grid-template-columns: 44px minmax(0, 1fr) !important;
+    padding: 16px !important;
+  }
+
+  .today-care-section .priority-content p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  .today-care-section .priority-top strong {
+    font-size: 15px !important;
+  }
+
+  .today-care-section .priority-top span {
+    font-size: 12px !important;
+  }
+}

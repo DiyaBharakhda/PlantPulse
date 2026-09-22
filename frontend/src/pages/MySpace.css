@@ -967,3 +967,34 @@
   background: rgba(255, 255, 255, 0.08);
   transform: translateX(-2px);
 }
+/* =========================================================
+   MOBILE PLANT DRAGGING
+   ========================================================= */
+
+.draggable-plant {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  z-index: 20;
+}
+
+.draggable-plant:active,
+.draggable-plant.is-dragging {
+  cursor: grabbing;
+  z-index: 50;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+@media (max-width: 700px) {
+  .draggable-plant {
+    touch-action: none;
+    min-width: 100px;
+    min-height: 70px;
+    padding: 10px;
+  }
+
+  .draggable-plant strong {
+    font-size: 13px;
+  }
+}
