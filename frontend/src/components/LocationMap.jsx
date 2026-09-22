@@ -5,7 +5,28 @@ import {
   Popup
 } from "react-leaflet"
 
+import L from "leaflet"
 import "leaflet/dist/leaflet.css"
+import "./LocationMap.css"
+
+
+/* =========================================================
+   PLANTPULSE LOCATION PIN
+   Custom icon avoids Leaflet's default-icon loading issue
+   ========================================================= */
+
+const locationPin = L.divIcon({
+  className: "plantpulse-location-marker",
+  html: `
+    <div class="plantpulse-pin">
+      <div class="plantpulse-pin-dot"></div>
+    </div>
+  `,
+  iconSize: [42, 52],
+  iconAnchor: [21, 52],
+  popupAnchor: [0, -48]
+})
+
 
 function LocationMap({
   latitude,
@@ -40,12 +61,13 @@ function LocationMap({
       >
 
         <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
+          attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
         <Marker
           position={[latitude, longitude]}
+          icon={locationPin}
           draggable={true}
           eventHandlers={{
             dragend: handleDragEnd

@@ -1149,3 +1149,64 @@
     font-size: 12px !important;
   }
 }
+/* =========================================================
+   FINAL MOBILE FIX — TODAY'S CARE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .dashboard-page {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: 0 12px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .dashboard-content {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .today-care-section {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .today-care-section .priority-list {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .today-care-section .priority-card {
+    display: grid !important;
+    grid-template-columns: 44px minmax(0, 1fr) !important;
+
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+
+    margin: 0 0 14px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .today-care-section .priority-content {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+}
