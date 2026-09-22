@@ -66,8 +66,8 @@ function LocationSetup({ onContinue }) {
 
         abortController.current = new AbortController()
 
-    let searchUrl =
-    `http://127.0.0.1:8000/api/search-location?q=${encodeURIComponent(value.trim())}`
+let searchUrl =
+  `${import.meta.env.VITE_API_URL}/api/search-location?q=${encodeURIComponent(value.trim())}`
 
     if (userCoordinates) {
     searchUrl +=

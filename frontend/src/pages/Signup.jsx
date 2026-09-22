@@ -28,7 +28,7 @@ function Signup({ onSignup, onGoToLogin }) {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/signup",
+        `${import.meta.env.VITE_API_URL}/api/signup`,
         {
           method: "POST",
           headers: {

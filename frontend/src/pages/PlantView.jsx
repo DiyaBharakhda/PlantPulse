@@ -69,8 +69,8 @@ useEffect(() => {
       }
 
       const response = await fetch(
-        `http://127.0.0.1:8000/api/weather?lat=${location.latitude}&lon=${location.longitude}`
-      )
+  `${import.meta.env.VITE_API_URL}/api/weather?lat=${location.latitude}&lon=${location.longitude}`
+)
 
       if (!response.ok) {
         throw new Error(

@@ -16,6 +16,8 @@ import PlantCare from "./pages/PlantCare"
 import "./PlantPulseTheme.css"
 import "./App.css"
 
+
+
 function App() {
 const [screen, setScreen] = useState(() => {
   return localStorage.getItem("plantpulse_user") ? "dashboard" : "welcome"
@@ -42,7 +44,7 @@ useEffect(() => {
   const loadPlants = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/plants/${currentUser.id}`
+       `${import.meta.env.VITE_API_URL}/api/plants/${currentUser.id}`
       )
 
       const data = await response.json()
@@ -98,8 +100,8 @@ useEffect(() => {
   const loadSpaces = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/spaces/${currentUser.id}`
-      )
+  `${import.meta.env.VITE_API_URL}/api/spaces/${currentUser.id}`
+)
 
       const data = await response.json()
 
@@ -129,8 +131,8 @@ if (screen === "login") {
 
   try {
     const response = await fetch(
-      `http://127.0.0.1:8000/api/plants/${user.id}`
-    )
+  `${import.meta.env.VITE_API_URL}/api/plants/${user.id}`
+)
 
     const data = await response.json()
 
@@ -171,47 +173,54 @@ if (screen === "signup") {
  if (screen === "location") {
   return (
     <LocationSetup
-      onContinue={async (location) => {
-        console.log("Selected location:", location)
+     onContinue={async (location) => {
+  console.log("Selected location:", location)
 
-        setLocation(location)
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/locations`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          user_id: currentUser.id,
+          name: location.name,
+          latitude: location.latitude,
+          longitude: location.longitude
+        })
+      }
+    )
 
-        try {
-          const response = await fetch(
-            "http://127.0.0.1:8000/api/locations",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                user_id: currentUser.id,
-                name: location.name,
-                latitude: location.latitude,
-                longitude: location.longitude
-              })
-            }
-          )
+    const data = await response.json()
 
-          const data = await response.json()
+    console.log("Location API response:", response.status, data)
 
-if (!response.ok) {
-  console.error("Location save failed:", data)
-} else {
-  console.log("Location saved:", data)
+    if (!response.ok) {
+      console.error("Location save failed:", data)
+      alert(
+        data.detail || "Could not save your location."
+      )
+      return
+    }
 
-  setLocation({
-    ...location,
-    id: data.location_id
-  })
-}
+    const savedLocation = {
+      ...location,
+      id: data.location_id
+    }
 
-        } catch (error) {
-          console.error("Location save failed:", error)
-        }
+    console.log("Saved location:", savedLocation)
 
-        setScreen("dashboard")
-      }}
+    setLocation(savedLocation)
+
+   setScreen("dashboard")
+
+  } catch (error) {
+    console.error("Location save failed:", error)
+    alert("Unable to save your location.")
+  }
+}}
     />
   )
 }
@@ -228,7 +237,7 @@ if (screen === "spaces") {
 
         try {
           const response = await fetch(
-            "http://127.0.0.1:8000/api/spaces",
+            `${import.meta.env.VITE_API_URL}/api/spaces`,
             {
               method: "POST",
               headers: {
@@ -398,7 +407,7 @@ if (screen === "choose-space") {
       }
 
       const spaceResponse = await fetch(
-        "http://127.0.0.1:8000/api/spaces",
+        `${import.meta.env.VITE_API_URL}/api/spaces`,
         {
           method: "POST",
           headers: {
@@ -442,7 +451,7 @@ if (screen === "choose-space") {
      * Save the plant.
      */
     const plantResponse = await fetch(
-      "http://127.0.0.1:8000/api/plants",
+      `${import.meta.env.VITE_API_URL}/api/plants`,
       {
         method: "POST",
         headers: {
@@ -478,7 +487,7 @@ if (screen === "choose-space") {
      * Save plant details.
      */
     const detailsResponse = await fetch(
-      `http://127.0.0.1:8000/api/plants/${plantResult.plant_id}`,
+     `${import.meta.env.VITE_API_URL}/api/plants/${plantResult.plant_id}`,
       {
         method: "PUT",
         headers: {
@@ -659,7 +668,7 @@ if (screen === "my-space") {
           for (const [plantId, spot] of Object.entries(selectedSpots)) {
 
             const response = await fetch(
-              `http://127.0.0.1:8000/api/plants/${plantId}`,
+              `${import.meta.env.VITE_API_URL}/api/plants/${plantId}`,
               {
                 method: "PUT",
                 headers: {
@@ -720,7 +729,7 @@ if (screen === "plant-library") {
 
         try {
           const response = await fetch(
-            `http://127.0.0.1:8000/api/plants/${currentUser.id}`
+            `${import.meta.env.VITE_API_URL}/api/plants/${currentUser.id}`
           )
 
           const data = await response.json()
@@ -913,7 +922,7 @@ onOpenPlantCare={(plant) => {
 onAddPlant={async () => {
   try {
     const response = await fetch(
-      `http://127.0.0.1:8000/api/spaces/${currentUser.id}`
+      `${import.meta.env.VITE_API_URL}/api/spaces/${currentUser.id}`
     )
 
     const data = await response.json()
@@ -956,7 +965,7 @@ if (screen === "watering") {
 
         try {
           const response = await fetch(
-            "http://127.0.0.1:8000/api/watering",
+            `${import.meta.env.VITE_API_URL}/api/watering`,
             {
               method: "POST",
               headers: {
