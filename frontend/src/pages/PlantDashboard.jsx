@@ -78,8 +78,8 @@ function PlantDashboard({
 
     setWeatherLoading(true)
     try {
-      const response = await fetch(
-  `${import.meta.env.VITE_API_URL}/api/weather?lat=${location.latitude}&lon=${location.longitude}`
+     const response = await fetch(
+  `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,relative_humidity_2m,precipitation,rain,weather_code,wind_speed_10m&daily=precipitation_probability_max,precipitation_sum&forecast_days=3&timezone=auto`
 )
 
       if (!response.ok) {
