@@ -49,9 +49,18 @@ function PlantDashboard({
   onOpenPlantCare,
   onAddPlant
 }) {
-  const [weather, setWeather] = useState(null)
-  const [weatherLoading, setWeatherLoading] = useState(false)
-  const [userLocation, setUserLocation] = useState(plantData?.location || null)
+ const [weather, setWeather] = useState(() => {
+  try {
+    return JSON.parse(sessionStorage.getItem("plantpulse_weather") || "null")
+  } catch {
+    return null
+  }
+})
+
+const [weatherLoading, setWeatherLoading] = useState(false)
+const [userLocation, setUserLocation] = useState(
+  location || plantData?.location || null
+)
   const [showLocationPopup, setShowLocationPopup] = useState(false)
   const [locationLoading, setLocationLoading] = useState(false)
   const [locationMessage, setLocationMessage] = useState("")
@@ -86,11 +95,17 @@ function PlantDashboard({
         throw new Error(`Weather request failed: ${response.status}`)
       }
 
-      setWeather(await response.json())
+     const weatherData = await response.json()
+
+setWeather(weatherData)
+
+sessionStorage.setItem(
+  "plantpulse_weather",
+  JSON.stringify(weatherData)
+)
     } catch (error) {
-      console.error("Weather fetch failed:", error)
-      setWeather(null)
-    } finally {
+  console.error("Weather fetch failed:", error)
+} finally {
       setWeatherLoading(false)
     }
   }
