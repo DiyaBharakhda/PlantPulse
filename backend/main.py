@@ -126,6 +126,8 @@ HEADERS = {
 
 # Simple in-memory cache
 search_cache = {}
+weather_cache = {}
+WEATHER_CACHE_SECONDS = 600
 
 # Prevent rapid requests to the public geocoding service
 last_request_time = 0
@@ -296,8 +298,19 @@ def get_weather(
     lat: float = Query(...),
     lon: float = Query(...),
 ):
-
     weather_url = "https://api.open-meteo.com/v1/forecast"
+
+    # Round coordinates so tiny GPS differences use the same cache
+    cache_key = (round(lat, 3), round(lon, 3))
+
+    # Return cached weather if it is still fresh
+    cached = weather_cache.get(cache_key)
+
+    if cached:
+        cached_data, cached_time = cached
+
+        if time.time() - cached_time < WEATHER_CACHE_SECONDS:
+            return cached_data
 
     params = {
         "latitude": lat,
@@ -309,18 +322,17 @@ def get_weather(
     }
 
     try:
-
         response = requests.get(
             weather_url,
             params=params,
-            timeout=10,
+            timeout=15,
         )
 
         response.raise_for_status()
 
         data = response.json()
 
-        return {
+        result = {
             "latitude": data["latitude"],
             "longitude": data["longitude"],
             "timezone": data["timezone"],
@@ -328,9 +340,35 @@ def get_weather(
             "daily": data["daily"],
         }
 
+        # Save successful response for 10 minutes
+        weather_cache[cache_key] = (result, time.time())
+
+        return result
+
+    except requests.HTTPError as error:
+
+        print("WEATHER ERROR:", repr(error))
+
+        # If Open-Meteo temporarily rate-limits us,
+        # use the previous cached result if one exists.
+        if cached:
+            cached_data, _ = cached
+            print("Using cached weather because weather service is temporarily unavailable.")
+            return cached_data
+
+        raise HTTPException(
+            status_code=502,
+            detail="Unable to contact the weather service.",
+        ) from error
+
     except requests.RequestException as error:
 
         print("WEATHER ERROR:", repr(error))
+
+        if cached:
+            cached_data, _ = cached
+            print("Using cached weather because weather service is temporarily unavailable.")
+            return cached_data
 
         raise HTTPException(
             status_code=502,
