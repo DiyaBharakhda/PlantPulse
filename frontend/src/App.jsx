@@ -38,6 +38,21 @@ useEffect(() => {
     localStorage.setItem("plantpulse_user", JSON.stringify(currentUser))
   }
 }, [currentUser])
+useEffect(() => {
+  if (!currentUser?.id) return
+
+  const savedLocation = localStorage.getItem(
+    `plantpulse_location_${currentUser.id}`
+  )
+
+  if (savedLocation) {
+    try {
+      setLocation(JSON.parse(savedLocation))
+    } catch (error) {
+      console.error("Failed to restore saved location:", error)
+    }
+  }
+}, [currentUser])
 
 useEffect(() => {
   if (!currentUser?.id) return
@@ -198,13 +213,23 @@ if (screen === "signup") {
 
     console.log("Location API response:", response.status, data)
 
-    if (!response.ok) {
-      console.error("Location save failed:", data)
-      alert(
-        data.detail || "Could not save your location."
-      )
-      return
-    }
+   if (!response.ok) {
+  console.error("Location save failed:", data)
+} else {
+  console.log("Location saved:", data)
+
+  const savedLocation = {
+    ...location,
+    id: data.location_id
+  }
+
+  setLocation(savedLocation)
+
+  localStorage.setItem(
+    `plantpulse_location_${currentUser.id}`,
+    JSON.stringify(savedLocation)
+  )
+}
 
     const savedLocation = {
       ...location,
