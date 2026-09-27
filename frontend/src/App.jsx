@@ -426,8 +426,27 @@ if (screen === "choose-space") {
      * If this space does not exist in the database yet,
      * create it first.
      */
-    if (!selectedSpace.id) {
-      if (!location?.id) {
+       if (!selectedSpace.id) {
+
+      let savedLocation = location
+
+      // Recover the saved location if React state is temporarily empty
+      if (!savedLocation?.id && currentUser?.id) {
+        try {
+          const storedLocation = localStorage.getItem(
+            `plantpulse_location_${currentUser.id}`
+          )
+
+          if (storedLocation) {
+            savedLocation = JSON.parse(storedLocation)
+            setLocation(savedLocation)
+          }
+        } catch (error) {
+          console.error("Failed to restore location:", error)
+        }
+      }
+
+      if (!savedLocation?.id) {
         alert("Location information is missing. Please select your location again.")
         return
       }
@@ -441,7 +460,7 @@ if (screen === "choose-space") {
           },
           body: JSON.stringify({
             user_id: currentUser.id,
-            location_id: location.id,
+            location_id: savedLocation.id,
             name: selectedSpace.name
           })
         }
